@@ -8,7 +8,9 @@ function Contact() {
     <>
     <Header/>
     <div className={Styles?.pageContainer}>
-      
+      <div className={`${Styles?.headContainer}`}>
+        
+      </div>
     </div>
     <Footer/>
     </>

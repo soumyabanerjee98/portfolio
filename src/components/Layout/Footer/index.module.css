@@ -6,6 +6,7 @@
     color: #028672;
     display: flex;
     justify-content: space-between;
+    font-family: 'Roboto Mono', monospace;
 }
 .leftContainer{
     display: flex;

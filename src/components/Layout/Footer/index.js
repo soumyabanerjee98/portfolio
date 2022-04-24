@@ -2,6 +2,7 @@ import React from 'react';
 import Styles from "./index.module.css";
 import Facebook from "../../../assets/svg/light/facebook.svg";
 import Instagram from "../../../assets/svg/light/instagram.svg";
+import LinkedIn from "../../../assets/svg/light/linkedin.svg";
 import Github from "../../../assets/svg/light/github.svg";
 import { config } from "../../../config/label";
 
@@ -22,6 +23,11 @@ function Footer() {
           <div className={`${Styles?.Icon}`}>
             <a href="https://github.com/soumyabanerjee98" alt="github">
             <img src={Github} alt="github-icon"/>
+            </a>
+          </div>
+          <div className={`${Styles?.Icon}`}>
+            <a href="https://www.linkedin.com/in/soumya-banerjee-853a541b8/" alt="linkedIn">
+            <img src={LinkedIn} alt="linkedin-icon"/>
             </a>
           </div>
         </div>
