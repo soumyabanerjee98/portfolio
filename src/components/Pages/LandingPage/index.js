@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React  from 'react'; //{ useState }
 import Styles from "./index.module.css";
 import { config } from "../../../config/label";
 import Header from '../../Layout/Header';
@@ -8,11 +8,11 @@ import TypeAnimation from 'react-type-animation';
 
 const LandingPage = () => {
 
-  const [projects, setProjects] = useState([{
-    prj_name: "",
-    prj_url: "",
-    prj_desc: ""
-  }]);
+  // const [projects, setProjects] = useState([{
+  //   prj_name: "",
+  //   prj_url: "",
+  //   prj_desc: ""
+  // }]);
 
   return (
     <>
@@ -65,4 +65,4 @@ const LandingPage = () => {
   )
 }
 
-export default LandingPage
+export default LandingPage;
