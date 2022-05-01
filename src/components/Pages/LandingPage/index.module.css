@@ -1,0 +1,28 @@
+.pageContainer{
+    min-height: 100vh;
+    padding: 2rem 4rem;
+}
+.headContainer{
+    display: flex;
+    justify-content: space-between;
+}
+.fullName{
+    font-family: 'Roboto Mono', monospace;
+    font-size: 5rem;
+    margin: 0 0 -2rem 0;
+}
+.skills{
+  font-family: 'Roboto Mono', monospace;
+  font-size: 2.5rem;
+  color: #028672;
+}
+.type::after {
+    content: '';
+    animation: cursor 1s infinite step-start;
+  }
+  
+  @keyframes cursor {
+    50% {
+      opacity: 0;
+    }
+  }
