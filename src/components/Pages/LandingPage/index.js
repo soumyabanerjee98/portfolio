@@ -50,13 +50,13 @@ const LandingPage = () => {
         </div>
         <div className={`${Styles?.bodyContainer}`}>
           <div className={`${Styles?.bodyContainer_projects}`}>
-            {projects.map((items) => {
+            {/* {projects.map((items) => {
               return(
                 <div className={`${Styles?.projects_card}`}>
                   
                 </div>
               )
-            })}
+            })} */}
           </div>
         </div>
       </div>
