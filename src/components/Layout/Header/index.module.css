@@ -27,3 +27,13 @@
 .contact :hover{
     opacity: 1;
 }
+
+@media screen and (min-width: 300px) and (max-width: 440px){
+    .moduleContainer{
+        padding: 1rem 1rem;
+        font-size: 12px;
+    }
+    .leftContainer{
+        font-size: 14px;
+    }
+}
