@@ -6,6 +6,7 @@
     color: #028672;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     font-family: 'Roboto Mono', monospace;
 }
 .leftContainer{
@@ -17,4 +18,19 @@
 }
 .Icon :hover{
     opacity: 0.6;
+}
+
+@media screen and (min-width: 300px) and (max-width: 440px){
+    .moduleContainer{
+        padding: 1rem 0.5rem;
+    }
+    .Icon {
+        transform: scale(0.65);
+    }
+    .leftContainer{
+        gap: 0;
+    }
+    .rightContainer{
+        font-size: 11px;
+    }
 }

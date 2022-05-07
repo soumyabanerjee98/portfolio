@@ -6,6 +6,10 @@
     display: flex;
     justify-content: space-between;
 }
+.headContainer_right > img{
+  height: 400px;
+  width: 400px;
+}
 .fullName{
     font-family: 'Roboto Mono', monospace;
     font-size: 5rem;
@@ -24,5 +28,24 @@
   @keyframes cursor {
     50% {
       opacity: 0;
+    }
+  }
+
+  @media screen and (min-width: 300px) and (max-width: 440px){
+    .pageContainer{
+      padding: 1rem 1rem;
+    }
+    .fullName{
+      font-size: 2rem;
+    }
+    .skills{
+      font-size: 1rem;
+    }
+    .headContainer_right{
+      margin-top: 2rem;
+    }
+    .headContainer_right > img{
+      height: 100px;
+      width: 100px;
     }
   }

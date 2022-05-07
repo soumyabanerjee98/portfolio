@@ -45,7 +45,7 @@ const LandingPage = () => {
             </div>
           </div>
           <div className={`${Styles?.headContainer_right}`}>
-            <img src={Profile} alt="profile" style={{height: 400, width: 400}}/>
+            <img src={Profile} alt="profile"/>
           </div>
         </div>
         <div className={`${Styles?.bodyContainer}`}>
