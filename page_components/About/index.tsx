@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./index.module.css";
-import { elementIdConfig } from "@/config";
+import { elementIdConfig, webConfig } from "@/config";
 import Image from "next/image";
 import ProfilePhoto from "../../public/profile-photo.jpeg";
 import { TypeAnimation } from "react-type-animation";
@@ -16,6 +16,14 @@ const About = (props: PageProps) => {
     { label: "Skills", ref: elementIdConfig?.skills },
     { label: "Projects", ref: elementIdConfig?.projects },
   ];
+  const typeAnimationSet = () => {
+    let arr: any[] = [];
+    webConfig?.type_animation_set?.map((i: string) => {
+      arr.push(i);
+      arr.push(webConfig?.type_animation_interval);
+    });
+    return arr;
+  };
   const navigate = (id: string) => {
     const element = document.getElementById(id);
     element?.scrollIntoView();
@@ -282,25 +290,29 @@ const About = (props: PageProps) => {
           <>Hi!</>
           <br />
           <>
-            Myself <span className={styles?.name}>Soumya</span>
+            Myself <span className={styles?.name}>{webConfig?.first_name}</span>
           </>
           <br />
           <>and I am</>
           <div className={styles?.type_animation}>
             <TypeAnimation
-              sequence={[
-                "Full stack developer",
-                2000,
-                "Automobile enthusiast",
-                2000,
-                "Gamer",
-                2000,
-              ]}
+              sequence={typeAnimationSet()}
               cursor={true}
               repeat={Infinity}
             />
           </div>
         </div>
+      </div>
+      <div className={styles?.bio_section}>
+        <div className={styles?.who}>
+          Who am I
+          <TypeAnimation
+            sequence={["", 1000, "?", 1000, "??", 1000, "???", 1000]}
+            cursor={false}
+            repeat={Infinity}
+          />
+        </div>
+        <div className={styles?.bio}>{webConfig?.details}</div>
       </div>
     </div>
   );
