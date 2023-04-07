@@ -106,7 +106,7 @@
 .bio{
   margin: 4rem 2rem;
   font-weight: 500;
-  background-color: var(--primary);
+  background-image: linear-gradient(270deg, var(--primary), var(--primary-hover));
   padding: 3rem 1rem 1rem 1rem;
   border-radius: 8px;
   color: var(--white);
@@ -119,4 +119,5 @@
   font-size: 3.5rem;
   font-weight: 600;
   color: var(--white);
+  text-shadow: 1px 1px 2px var(--primary-hover);
 }

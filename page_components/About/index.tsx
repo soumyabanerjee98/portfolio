@@ -304,14 +304,7 @@ const About = (props: PageProps) => {
         </div>
       </div>
       <div className={styles?.bio_section}>
-        <div className={styles?.who}>
-          Who am I
-          <TypeAnimation
-            sequence={["", 1000, "?", 1000, "??", 1000, "???", 1000]}
-            cursor={false}
-            repeat={Infinity}
-          />
-        </div>
+        <div className={styles?.who}>About me</div>
         <div className={styles?.bio}>{webConfig?.details}</div>
       </div>
     </div>
