@@ -1,0 +1,100 @@
+.main {
+  height: 100vh;
+  scroll-snap-align: center;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+}
+.header_left_column {
+  display: flex;
+  gap: 4rem;
+  align-items: center;
+}
+.nav_links {
+  font-weight: 600;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  background-repeat: no-repeat;
+  transition: 0.5s ease-out;
+  cursor: pointer;
+  background-image: radial-gradient(
+      closest-side,
+      var(--primary) 50%,
+      transparent 100%
+    ),
+    linear-gradient(to bottom, var(--primary-hover), var(--primary-hover));
+  background-size: 0% 0%, 100% 100%;
+  background-position: 50% 50%, center;
+}
+.nav_links:hover {
+  background-size: 260% 260%, 100% 100%;
+}
+.header_right_column {
+  background-color: var(--secondary);
+  padding: 0.8rem;
+  border-radius: 0.4rem;
+  color: var(--primary);
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.3s ease-out;
+}
+.header_right_column:hover {
+  color: var(--secondary);
+  background-color: var(--primary-hover);
+  transition: 0.3s ease-out;
+}
+.details {
+  display: flex;
+  justify-content: space-between;
+  margin: 3rem 4rem;
+  position: relative;
+}
+.profile_photo {
+  border-radius: 50%;
+  height: 20rem;
+  width: auto;
+  animation: animate 10s infinite ease alternate;
+}
+@keyframes animate {
+  0% {
+    transform: translate(0);
+  }
+  25% {
+    transform: translate(-4px, 4px);
+  }
+  50% {
+    transform: translate(4px, 8px);
+  }
+  75% {
+    transform: translate(4px, 4px);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+.introduction {
+  color: var(--secondary);
+  font-size: 32px;
+  text-shadow: 1px;
+  width: 50%;
+}
+.name {
+  color: var(--white);
+  font-size: 54px;
+  margin: 0 1rem;
+}
+.type_animation {
+  margin-top: 1rem;
+  color: var(--white);
+  font-size: 48px;
+}
+.distort{
+    height: 100vh !important;
+    width: -webkit-fill-available !important;
+    position: absolute !important;
+    left: -70vw;
+    top: -30vh;
+}

@@ -1,0 +1,15 @@
+.main {
+  height: 100vh;
+  font-family: "Montserrat", sans-serif;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  overflow-y: auto;
+  background-image: url(../public/cool-background.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.main::-webkit-scrollbar {
+  display: none;
+}
