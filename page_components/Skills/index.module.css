@@ -1,4 +1,56 @@
 .main {
     height: 50vh;
     scroll-snap-align: center;
+    position: relative;
+}
+
+.header {
+    top: 4rem;
+    width: 100%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 32px;
+    color: var(--secondary-hover);
+    text-shadow: 1px 1px var(--white);
+}
+
+.distort {
+    position: absolute !important;
+    top: -4rem !important;
+}
+
+.square_bg {
+    background-color: var(--white);
+    position: absolute;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: ballfloat 5s infinite ease-in-out alternate;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.square_bg:hover {
+    scale: 1.1;
+    transition: all 0.3s ease-in-out;
+}
+
+@keyframes ballfloat {
+    100% {
+        transform: translateY(1rem);
+    }
+}
+
+.grid_wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: relative;
+    perspective: 500px;
 }
