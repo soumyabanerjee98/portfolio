@@ -40,6 +40,7 @@
 }
 .node_element_noshow {
   opacity: 0;
+  width: 0;
 }
 .node_text{
     color: var(--white);
