@@ -18,3 +18,12 @@ export const elementIdConfig = {
   projects: "projects",
   skills: "skills",
 };
+
+export const colorConfig = {
+  primary: "#363676",
+  primary_hover: "#535494",
+  secondary: "#a4bcd7",
+  secondary_hover: "#a4bcd7",
+  white: "white",
+  black: "black",
+};

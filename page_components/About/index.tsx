@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./index.module.css";
-import { elementIdConfig, webConfig } from "@/config";
+import { colorConfig, elementIdConfig, webConfig } from "@/config";
 import Image from "next/image";
 import ProfilePhoto from "../../public/profile-photo.jpeg";
 import { TypeAnimation } from "react-type-animation";
@@ -55,229 +55,53 @@ const About = (props: PageProps) => {
       </div>
       <div className={styles?.details}>
         <Canvas className={styles?.distort}>
-          <OrbitControls enableZoom={false} />
+          {/* <OrbitControls enableZoom={false} /> */}
           <ambientLight intensity={2} />
           <directionalLight position={[3, 2, 1]} />
-          <Sphere
-            args={[1, 100, 200]}
-            scale={1.7}
-            key={undefined}
-            id={undefined}
-            name={undefined}
-            material={undefined}
-            quaternion={undefined}
-            onClick={undefined}
-            onPointerMissed={undefined}
-            onContextMenu={undefined}
-            onDoubleClick={undefined}
-            onPointerDown={undefined}
-            onPointerMove={undefined}
-            onPointerUp={undefined}
-            onPointerCancel={undefined}
-            onPointerEnter={undefined}
-            onPointerLeave={undefined}
-            onPointerOver={undefined}
-            onPointerOut={undefined}
-            onWheel={undefined}
-            attach={undefined}
-            onUpdate={undefined}
-            position={undefined}
-            up={undefined}
-            rotation={undefined}
-            matrix={undefined}
-            layers={undefined}
-            dispose={undefined}
-            visible={undefined}
-            type={undefined}
-            uuid={undefined}
-            parent={undefined}
-            modelViewMatrix={undefined}
-            normalMatrix={undefined}
-            matrixWorld={undefined}
-            matrixAutoUpdate={undefined}
-            matrixWorldAutoUpdate={undefined}
-            matrixWorldNeedsUpdate={undefined}
-            castShadow={undefined}
-            receiveShadow={undefined}
-            frustumCulled={undefined}
-            renderOrder={undefined}
-            animations={undefined}
-            userData={undefined}
-            customDepthMaterial={undefined}
-            customDistanceMaterial={undefined}
-            isObject3D={undefined}
-            onBeforeRender={undefined}
-            onAfterRender={undefined}
-            applyMatrix4={undefined}
-            applyQuaternion={undefined}
-            setRotationFromAxisAngle={undefined}
-            setRotationFromEuler={undefined}
-            setRotationFromMatrix={undefined}
-            setRotationFromQuaternion={undefined}
-            rotateOnAxis={undefined}
-            rotateOnWorldAxis={undefined}
-            rotateX={undefined}
-            rotateY={undefined}
-            rotateZ={undefined}
-            translateOnAxis={undefined}
-            translateX={undefined}
-            translateY={undefined}
-            translateZ={undefined}
-            localToWorld={undefined}
-            worldToLocal={undefined}
-            lookAt={undefined}
-            add={undefined}
-            remove={undefined}
-            removeFromParent={undefined}
-            clear={undefined}
-            getObjectById={undefined}
-            getObjectByName={undefined}
-            getObjectByProperty={undefined}
-            getObjectsByProperty={undefined}
-            getWorldPosition={undefined}
-            getWorldQuaternion={undefined}
-            getWorldScale={undefined}
-            getWorldDirection={undefined}
-            raycast={undefined}
-            traverse={undefined}
-            traverseVisible={undefined}
-            traverseAncestors={undefined}
-            updateMatrix={undefined}
-            updateMatrixWorld={undefined}
-            updateWorldMatrix={undefined}
-            toJSON={undefined}
-            clone={undefined}
-            copy={undefined}
-            addEventListener={undefined}
-            hasEventListener={undefined}
-            removeEventListener={undefined}
-            dispatchEvent={undefined}
-            geometry={undefined}
-            morphTargetInfluences={undefined}
-            morphTargetDictionary={undefined}
-            isMesh={undefined}
-            updateMorphTargets={undefined}
-            getVertexPosition={undefined}
-          >
+          {/* @ts-ignore */}
+          <Sphere args={[1, 100, 200]} scale={1.7}>
             <MeshDistortMaterial
-              color={"#535494"}
+              color={colorConfig?.primary_hover}
               attach="material"
               distort={0.5}
               speed={0.2}
             />
-          </Sphere>
-        </Canvas>
-        <Canvas className={styles?.distort}>
-          <OrbitControls enableZoom={false} />
-          <ambientLight intensity={1} />
-          <directionalLight position={[1, 2, 3]} />
-          <Sphere
-            args={[1, 100, 200]}
-            scale={1.5}
-            key={undefined}
-            name={undefined}
-            id={undefined}
-            material={undefined}
-            quaternion={undefined}
-            onClick={undefined}
-            onPointerMissed={undefined}
-            onContextMenu={undefined}
-            onDoubleClick={undefined}
-            onPointerDown={undefined}
-            onPointerMove={undefined}
-            onPointerUp={undefined}
-            onPointerCancel={undefined}
-            onPointerEnter={undefined}
-            onPointerLeave={undefined}
-            onPointerOver={undefined}
-            onPointerOut={undefined}
-            onWheel={undefined}
-            attach={undefined}
-            onUpdate={undefined}
-            position={undefined}
-            up={undefined}
-            rotation={undefined}
-            matrix={undefined}
-            layers={undefined}
-            dispose={undefined}
-            visible={undefined}
-            type={undefined}
-            uuid={undefined}
-            parent={undefined}
-            modelViewMatrix={undefined}
-            normalMatrix={undefined}
-            matrixWorld={undefined}
-            matrixAutoUpdate={undefined}
-            matrixWorldAutoUpdate={undefined}
-            matrixWorldNeedsUpdate={undefined}
-            castShadow={undefined}
-            receiveShadow={undefined}
-            frustumCulled={undefined}
-            renderOrder={undefined}
-            animations={undefined}
-            userData={undefined}
-            customDepthMaterial={undefined}
-            customDistanceMaterial={undefined}
-            isObject3D={undefined}
-            onBeforeRender={undefined}
-            onAfterRender={undefined}
-            applyMatrix4={undefined}
-            applyQuaternion={undefined}
-            setRotationFromAxisAngle={undefined}
-            setRotationFromEuler={undefined}
-            setRotationFromMatrix={undefined}
-            setRotationFromQuaternion={undefined}
-            rotateOnAxis={undefined}
-            rotateOnWorldAxis={undefined}
-            rotateX={undefined}
-            rotateY={undefined}
-            rotateZ={undefined}
-            translateOnAxis={undefined}
-            translateX={undefined}
-            translateY={undefined}
-            translateZ={undefined}
-            localToWorld={undefined}
-            worldToLocal={undefined}
-            lookAt={undefined}
-            add={undefined}
-            remove={undefined}
-            removeFromParent={undefined}
-            clear={undefined}
-            getObjectById={undefined}
-            getObjectByName={undefined}
-            getObjectByProperty={undefined}
-            getObjectsByProperty={undefined}
-            getWorldPosition={undefined}
-            getWorldQuaternion={undefined}
-            getWorldScale={undefined}
-            getWorldDirection={undefined}
-            raycast={undefined}
-            traverse={undefined}
-            traverseVisible={undefined}
-            traverseAncestors={undefined}
-            updateMatrix={undefined}
-            updateMatrixWorld={undefined}
-            updateWorldMatrix={undefined}
-            toJSON={undefined}
-            clone={undefined}
-            copy={undefined}
-            addEventListener={undefined}
-            hasEventListener={undefined}
-            removeEventListener={undefined}
-            dispatchEvent={undefined}
-            geometry={undefined}
-            morphTargetInfluences={undefined}
-            morphTargetDictionary={undefined}
-            isMesh={undefined}
-            updateMorphTargets={undefined}
-            getVertexPosition={undefined}
-          >
-            <MeshDistortMaterial
-              color={"#363676"}
-              attach="material"
-              distort={0.5}
-              speed={0.2}
-            />
+            {/* @ts-ignore */}
+            <Sphere
+              args={[1, 100, 200]}
+              scale={0.2}
+              position={[-0.6, 0.8, 0.8]}
+            >
+              <MeshDistortMaterial
+                color={colorConfig?.primary}
+                attach="material"
+                distort={0.5}
+                speed={0.9}
+              />
+            </Sphere>
+            {/* @ts-ignore */}
+            <Sphere args={[1, 100, 200]} scale={0.2} position={[1, -0.2, 0.8]}>
+              <MeshDistortMaterial
+                color={colorConfig?.primary}
+                attach="material"
+                distort={0.5}
+                speed={0.9}
+              />
+            </Sphere>
+            {/* @ts-ignore */}
+            <Sphere
+              args={[1, 100, 200]}
+              scale={0.2}
+              position={[-0.6, -1.6, -0.8]}
+            >
+              <MeshDistortMaterial
+                color={colorConfig?.primary}
+                attach="material"
+                distort={0.5}
+                speed={0.9}
+              />
+            </Sphere>
+            {/* @ts-ignore */}
           </Sphere>
         </Canvas>
         <Image

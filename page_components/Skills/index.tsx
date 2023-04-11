@@ -1,233 +1,247 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import styles from "./index.module.css";
-import { motion, useMotionValue, useSpring } from "framer-motion";
-import { distance } from "@popmotion/popcorn";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import CameraControls from "camera-controls";
 import Image from "next/image";
 import ReactLogo from "../../public/react.png";
 import NextLogo from "../../public/next-js.svg";
 import NodeLogo from "../../public/node-js.svg";
 import MongoLogo from "../../public/mongo.svg";
 import TypeScriptLogo from "../../public/typescript.svg";
-import { Canvas } from "@react-three/fiber";
-import { OrbitControls, Sphere, MeshDistortMaterial } from "@react-three/drei";
+import { Sphere, MeshDistortMaterial, Html } from "@react-three/drei";
+// @ts-ignore
+import * as THREE from "three";
+import { colorConfig } from "@/config";
 
-const grid = [
-  [
-    <Image src={TypeScriptLogo} alt="logo" height={35} draggable={false} />,
-    <Image src={ReactLogo} alt="logo" height={35} draggable={false} />,
-    <Image src={NextLogo} alt="logo" height={35} draggable={false} />,
-    <Image src={NodeLogo} alt="logo" height={35} draggable={false} />,
-    <Image src={MongoLogo} alt="logo" height={35} draggable={false} />,
-  ],
-];
-const size = 60;
-const gap = 50;
+CameraControls.install({ THREE });
 
-type SquareType = {
-  active: any;
-  setActive: any;
-  colIndex: number;
-  rowIndex: number;
-  x: any;
-  y: any;
-  element: any;
+const positionCoords = {
+  x: 0,
+  y: 0,
+  z: 50,
+};
+const fov = 10;
+
+type OrbitCameraProps = {
+  zoom: boolean;
+  focus: any;
+  zoomedPosition: number[];
 };
 
-const Square = ({
-  active,
-  setActive,
-  colIndex,
-  rowIndex,
-  x,
-  y,
-  element,
-}: SquareType) => {
-  const isDragging = colIndex === active.col && rowIndex === active.row;
-  const d = distance(
-    { x: active.col, y: active.row },
-    { x: colIndex, y: rowIndex }
-  );
-  const springConfig = {
-    stiffness: Math.max(700 - d * 120, 0),
-    damping: 20 + d * 5,
-  };
-  const dx = useSpring(x, springConfig);
-  const dy = useSpring(y, springConfig);
+const OrbitCamera = (props: OrbitCameraProps) => {
+  try {
+    const { zoom, focus, zoomedPosition } = props;
+    const pos = new THREE.Vector3();
+    const look = new THREE.Vector3();
+    const camera = useThree((state) => state.camera);
+    const gl = useThree((state) => state.gl);
+    const controls = useMemo(
+      () => new CameraControls(camera, gl.domElement),
+      []
+    );
+    return useFrame((state, delta) => {
+      zoom
+        ? pos.set(zoomedPosition?.[0], zoomedPosition?.[1], zoomedPosition?.[2])
+        : pos.set(positionCoords?.x, positionCoords?.y, positionCoords?.z);
+      zoom ? look.set(focus?.x, focus?.y, focus?.z) : look.set(0, 0, 0);
 
+      state.camera.position.lerp(pos, 0.8);
+      state.camera.updateProjectionMatrix();
+
+      controls.setLookAt(
+        state.camera.position.x,
+        state.camera.position.y,
+        state.camera.position.z,
+        look?.x,
+        look?.y,
+        look?.z,
+        true
+      );
+      return controls.update(delta);
+    });
+  } catch (error) {
+    return null;
+  }
+};
+
+const imageArr = [
+  {
+    element: (
+      <div className={styles?.node_image}>
+        <Image src={TypeScriptLogo} alt="logo" height={35} draggable={false} />
+        <div className={styles?.node_text}>TypeScript</div>
+      </div>
+    ),
+    position: [0, 1.2, 1],
+    texture: "#b0b0b0",
+    zoomedPosition: [-15, 30, 10],
+  },
+  {
+    element: (
+      <div className={styles?.node_image}>
+        <Image src={ReactLogo} alt="logo" height={35} draggable={false} />
+        <div className={styles?.node_text}>React JS</div>
+      </div>
+    ),
+    position: [1.2, 0.5, 1.5],
+    texture: "#b0b0b0",
+    zoomedPosition: [20, 0, 30],
+  },
+  {
+    element: (
+      <div className={styles?.node_image}>
+        <Image src={NextLogo} alt="logo" height={35} draggable={false} />
+        <div className={styles?.node_text}>Next JS</div>
+      </div>
+    ),
+    position: [0.5, -1.2, 1.5],
+    texture: "#b0b0b0",
+    zoomedPosition: [-5, -20, 30],
+  },
+  {
+    element: (
+      <div className={styles?.node_image}>
+        <Image src={NodeLogo} alt="logo" height={35} draggable={false} />
+        <div className={styles?.node_text}>Node JS</div>
+      </div>
+    ),
+    position: [-1.2, 0.5, -1.5],
+    texture: "#b0b0b0",
+    zoomedPosition: [-30, 15, -5],
+  },
+  {
+    element: (
+      <div className={styles?.node_image}>
+        <Image src={MongoLogo} alt="logo" height={35} draggable={false} />
+        <div className={styles?.node_text}>Mongo DB</div>
+      </div>
+    ),
+    position: [-0.5, -1.2, -1],
+    texture: "#b0b0b0",
+    zoomedPosition: [-20, -30, 0],
+  },
+];
+
+type PlanetSphereProps = {
+  index: number;
+  rad: number;
+  pos: number[];
+  scale: number;
+  texture: string;
+  zoomToView: any;
+  zoomedPos: number[];
+  element: any;
+  zoom: boolean;
+  nodeNumber: null | number;
+};
+
+const PlanetSphere = (props: PlanetSphereProps) => {
+  const {
+    index,
+    rad,
+    pos,
+    texture,
+    scale,
+    zoomToView,
+    zoom,
+    element,
+    zoomedPos,
+    nodeNumber,
+  } = props;
   return (
-    <motion.div
-      drag
-      dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
-      dragTransition={{ bounceStiffness: 500, bounceDamping: 20 }}
-      dragElastic={1}
-      onDragStart={() => setActive({ row: rowIndex, col: colIndex })}
-      className={styles?.square_bg}
-      style={{
-        width: size,
-        height: size,
-        top: rowIndex * (size + gap),
-        left: colIndex * (size + gap),
-        x: isDragging ? x : dx,
-        y: isDragging ? y : dy,
-        zIndex: isDragging ? 1 : 0,
-        animationDelay: `${colIndex}s`,
-      }}
-    >
-      {element}
-    </motion.div>
+    <mesh key={index}>
+      {/* @ts-ignore */}
+      <Sphere
+        args={[rad, 500, 500]}
+        position={pos}
+        scale={scale}
+        onClick={(e: any) => {
+          zoomToView(index, e?.object?.position, zoomedPos);
+        }}
+      >
+        <meshStandardMaterial roughness={1} color={texture} />
+        <Html>
+          <div
+            className={
+              zoom && nodeNumber === index
+                ? styles?.node_element
+                : styles?.node_element_noshow
+            }
+            onClick={() => {
+              if (zoom) {
+                zoomToView(index, positionCoords, zoomedPos);
+              }
+            }}
+          >
+            {element}
+          </div>
+        </Html>
+      </Sphere>
+    </mesh>
   );
 };
 
 const Skills = (props: PageProps) => {
   const { id } = props;
-  const [active, setActive] = useState({ row: 0, col: 0 });
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
+  const [zoom, setZoom] = useState(false);
+  const [activeNode, setActiveNode] = useState<number | null>(null);
+  const [focus, setFocus] = useState({});
+  const [zoomedPos, setZoomedPos] = useState<number[]>([]);
+  const zoomToView = (ind: number, pos: any, zoomedPos: number[]) => {
+    if (activeNode) {
+      setActiveNode(null);
+    } else {
+      setActiveNode(ind);
+    }
+    setZoom((prev) => !prev);
+    if (JSON.stringify(focus) === "{}") {
+      setFocus(pos);
+    } else {
+      setFocus({});
+    }
+    setZoomedPos(zoomedPos);
+  };
   return (
     <div id={id} className={styles?.main}>
-      <Canvas className={styles?.distort}>
-        <OrbitControls enableZoom={false} />
+      <Canvas
+        className={styles?.distort}
+        camera={{
+          position: [positionCoords?.x, positionCoords?.y, positionCoords?.z],
+          fov: fov,
+        }}
+      >
+        <OrbitCamera zoom={zoom} focus={focus} zoomedPosition={zoomedPos} />
         <ambientLight intensity={0.8} />
         <directionalLight position={[1, 3, 5]} />
-        <Sphere
-          args={[1.5, 500, 500]}
-          scale={1.5}
-          key={undefined}
-          name={undefined}
-          id={undefined}
-          material={undefined}
-          quaternion={undefined}
-          onClick={undefined}
-          onPointerMissed={undefined}
-          onContextMenu={undefined}
-          onDoubleClick={undefined}
-          onPointerDown={undefined}
-          onPointerMove={undefined}
-          onPointerUp={undefined}
-          onPointerCancel={undefined}
-          onPointerEnter={undefined}
-          onPointerLeave={undefined}
-          onPointerOver={undefined}
-          onPointerOut={undefined}
-          onWheel={undefined}
-          attach={undefined}
-          onUpdate={undefined}
-          position={undefined}
-          up={undefined}
-          rotation={undefined}
-          matrix={undefined}
-          layers={undefined}
-          dispose={undefined}
-          visible={undefined}
-          type={undefined}
-          uuid={undefined}
-          parent={undefined}
-          modelViewMatrix={undefined}
-          normalMatrix={undefined}
-          matrixWorld={undefined}
-          matrixAutoUpdate={undefined}
-          matrixWorldAutoUpdate={undefined}
-          matrixWorldNeedsUpdate={undefined}
-          castShadow={undefined}
-          receiveShadow={undefined}
-          frustumCulled={undefined}
-          renderOrder={undefined}
-          animations={undefined}
-          userData={undefined}
-          customDepthMaterial={undefined}
-          customDistanceMaterial={undefined}
-          isObject3D={undefined}
-          onBeforeRender={undefined}
-          onAfterRender={undefined}
-          applyMatrix4={undefined}
-          applyQuaternion={undefined}
-          setRotationFromAxisAngle={undefined}
-          setRotationFromEuler={undefined}
-          setRotationFromMatrix={undefined}
-          setRotationFromQuaternion={undefined}
-          rotateOnAxis={undefined}
-          rotateOnWorldAxis={undefined}
-          rotateX={undefined}
-          rotateY={undefined}
-          rotateZ={undefined}
-          translateOnAxis={undefined}
-          translateX={undefined}
-          translateY={undefined}
-          translateZ={undefined}
-          localToWorld={undefined}
-          worldToLocal={undefined}
-          lookAt={undefined}
-          add={undefined}
-          remove={undefined}
-          removeFromParent={undefined}
-          clear={undefined}
-          getObjectById={undefined}
-          getObjectByName={undefined}
-          getObjectByProperty={undefined}
-          getObjectsByProperty={undefined}
-          getWorldPosition={undefined}
-          getWorldQuaternion={undefined}
-          getWorldScale={undefined}
-          getWorldDirection={undefined}
-          raycast={undefined}
-          traverse={undefined}
-          traverseVisible={undefined}
-          traverseAncestors={undefined}
-          updateMatrix={undefined}
-          updateMatrixWorld={undefined}
-          updateWorldMatrix={undefined}
-          toJSON={undefined}
-          clone={undefined}
-          copy={undefined}
-          addEventListener={undefined}
-          hasEventListener={undefined}
-          removeEventListener={undefined}
-          dispatchEvent={undefined}
-          geometry={undefined}
-          morphTargetInfluences={undefined}
-          morphTargetDictionary={undefined}
-          isMesh={undefined}
-          updateMorphTargets={undefined}
-          getVertexPosition={undefined}
-        >
+        {/* @ts-ignore */}
+        <Sphere args={[1, 500, 500]} scale={1.3}>
           <MeshDistortMaterial
-            color={"#363676"}
+            color={colorConfig?.primary}
             attach="material"
             distort={0.5}
-            speed={0.2}
+            speed={0.8}
           />
+          <Html>
+            <div className={zoom ? styles?.header_noshow : styles?.header}>
+              Key Skills
+            </div>
+          </Html>
+          {imageArr?.map((i, idx) => (
+            <PlanetSphere
+              index={idx}
+              rad={1}
+              scale={0.2}
+              pos={i?.position}
+              texture={i?.texture}
+              zoomToView={zoomToView}
+              zoom={zoom}
+              element={i?.element}
+              zoomedPos={i?.zoomedPosition}
+              nodeNumber={activeNode}
+            />
+          ))}
         </Sphere>
       </Canvas>
-      <div className={styles?.header}>Key Skills</div>
-      <motion.div
-        animate={{ "--base-hue": 360 } as any}
-        initial={{ "--base-hue": 0 } as any}
-        transition={{ duration: 10, loop: Infinity, ease: "linear" }}
-        style={{ width: "100%", height: "100%" }}
-      >
-        <motion.div
-          className={styles?.grid_wrapper}
-          style={{
-            width: (size + gap) * 5 - gap,
-            height: (size + gap) * 4 - gap,
-          }}
-        >
-          {grid.map((row, rowIndex) =>
-            row.map((_item, colIndex) => (
-              <Square
-                x={x}
-                y={y}
-                active={active}
-                setActive={setActive}
-                rowIndex={rowIndex}
-                colIndex={colIndex}
-                key={rowIndex + colIndex}
-                element={_item}
-              />
-            ))
-          )}
-        </motion.div>
-      </motion.div>
     </div>
   );
 };

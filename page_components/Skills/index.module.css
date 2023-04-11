@@ -1,56 +1,54 @@
 .main {
-    height: 50vh;
-    scroll-snap-align: center;
-    position: relative;
+  height: 50vh;
+  scroll-snap-align: center;
+  position: relative;
+  display: flex;
+  justify-content: center;
 }
 
 .header {
-    top: 4rem;
-    width: 100%;
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    font-weight: 600;
-    font-size: 32px;
-    color: var(--secondary-hover);
-    text-shadow: 1px 1px var(--white);
+  left: -5rem;
+  top: -1.5rem;
+  width: 10rem;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 32px;
+  color: var(--secondary-hover);
+  text-shadow: 1px 1px var(--black);
+  transition: all 0.8s ease-in-out;
+}
+
+.header_noshow {
+  opacity: 0;
+  transition: all 0.8s ease-in-out;
 }
 
 .distort {
-    position: absolute !important;
-    top: -4rem !important;
+  position: absolute !important;
+  top: -12rem !important;
+  height: 80vh !important;
+  width: 60vw !important;
 }
 
-.square_bg {
-    background-color: var(--white);
+.node_element {
     position: absolute;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    animation: ballfloat 5s infinite ease-in-out alternate;
-    transition: all 0.3s ease-in-out;
-    cursor: pointer;
+    top: -1.1rem;
+    left: -1.1rem;
+  transition: all 0.8s ease-in-out;
 }
-
-.square_bg:hover {
-    scale: 1.1;
-    transition: all 0.3s ease-in-out;
+.node_element_noshow {
+  opacity: 0;
 }
-
-@keyframes ballfloat {
-    100% {
-        transform: translateY(1rem);
-    }
+.node_text{
+    color: var(--white);
+    font-weight: 500;
+    margin-top: 0.4rem;
+    position: absolute;
+    left: -1rem;
 }
-
-.grid_wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    top: 100%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+.node_image{
     position: relative;
-    perspective: 500px;
+    width: 10rem;
 }
