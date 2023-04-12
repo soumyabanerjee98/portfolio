@@ -24,16 +24,17 @@ const fov = 10;
 
 type OrbitCameraProps = {
   zoom: boolean;
-  focus: any;
   zoomedPosition: number[];
 };
 
 const OrbitCamera = (props: OrbitCameraProps) => {
   try {
-    const { zoom, focus, zoomedPosition } = props;
+    const { zoom, zoomedPosition } = props;
     const pos = new THREE.Vector3();
     const look = new THREE.Vector3();
+    const deg2rad = (degrees: number) => degrees * (Math.PI / 180);
     const camera = useThree((state) => state.camera);
+    camera.rotation.set(deg2rad(30), 0, 0);
     const gl = useThree((state) => state.gl);
     const controls = useMemo(
       () => new CameraControls(camera, gl.domElement),
@@ -43,7 +44,6 @@ const OrbitCamera = (props: OrbitCameraProps) => {
       zoom
         ? pos.set(zoomedPosition?.[0], zoomedPosition?.[1], zoomedPosition?.[2])
         : pos.set(positionCoords?.x, positionCoords?.y, positionCoords?.z);
-      zoom ? look.set(focus?.x, focus?.y, focus?.z) : look.set(0, 0, 0);
 
       state.camera.position.lerp(pos, 0.8);
       state.camera.updateProjectionMatrix();
@@ -185,7 +185,6 @@ const Skills = (props: PageProps) => {
   const { id } = props;
   const [zoom, setZoom] = useState(false);
   const [activeNode, setActiveNode] = useState<number | null>(null);
-  const [focus, setFocus] = useState({});
   const [zoomedPos, setZoomedPos] = useState<number[]>([]);
   const zoomToView = (ind: number, pos: any, zoomedPos: number[]) => {
     if (activeNode) {
@@ -194,11 +193,6 @@ const Skills = (props: PageProps) => {
       setActiveNode(ind);
     }
     setZoom((prev) => !prev);
-    if (JSON.stringify(focus) === "{}") {
-      setFocus(pos);
-    } else {
-      setFocus({});
-    }
     setZoomedPos(zoomedPos);
   };
   return (
@@ -210,7 +204,7 @@ const Skills = (props: PageProps) => {
           fov: fov,
         }}
       >
-        <OrbitCamera zoom={zoom} focus={focus} zoomedPosition={zoomedPos} />
+        <OrbitCamera zoom={zoom} zoomedPosition={zoomedPos} />
         <ambientLight intensity={0.8} />
         <directionalLight position={[1, 3, 5]} />
         {/* @ts-ignore */}
