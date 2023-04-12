@@ -46,10 +46,7 @@
     color: var(--white);
     font-weight: 500;
     margin-top: 0.4rem;
+    width: max-content;
     position: absolute;
     left: -1rem;
-}
-.node_image{
-    position: relative;
-    width: 10rem;
 }

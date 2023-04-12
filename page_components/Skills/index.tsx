@@ -67,10 +67,10 @@ const OrbitCamera = (props: OrbitCameraProps) => {
 const imageArr = [
   {
     element: (
-      <div className={styles?.node_image}>
+      <>
         <Image src={TypeScriptLogo} alt="logo" height={35} draggable={false} />
         <div className={styles?.node_text}>TypeScript</div>
-      </div>
+      </>
     ),
     position: [0, 1.2, 1],
     texture: "#b0b0b0",
@@ -78,10 +78,10 @@ const imageArr = [
   },
   {
     element: (
-      <div className={styles?.node_image}>
+      <>
         <Image src={ReactLogo} alt="logo" height={35} draggable={false} />
         <div className={styles?.node_text}>React JS</div>
-      </div>
+      </>
     ),
     position: [1.2, 0.5, 1.5],
     texture: "#b0b0b0",
@@ -89,10 +89,10 @@ const imageArr = [
   },
   {
     element: (
-      <div className={styles?.node_image}>
+      <>
         <Image src={NextLogo} alt="logo" height={35} draggable={false} />
         <div className={styles?.node_text}>Next JS</div>
-      </div>
+      </>
     ),
     position: [0.5, -1.2, 1.5],
     texture: "#b0b0b0",
@@ -100,10 +100,10 @@ const imageArr = [
   },
   {
     element: (
-      <div className={styles?.node_image}>
+      <>
         <Image src={NodeLogo} alt="logo" height={35} draggable={false} />
         <div className={styles?.node_text}>Node JS</div>
-      </div>
+      </>
     ),
     position: [-1.2, 0.5, -1.5],
     texture: "#b0b0b0",
@@ -111,10 +111,10 @@ const imageArr = [
   },
   {
     element: (
-      <div className={styles?.node_image}>
+      <>
         <Image src={MongoLogo} alt="logo" height={35} draggable={false} />
         <div className={styles?.node_text}>Mongo DB</div>
-      </div>
+      </>
     ),
     position: [-0.5, -1.2, -1],
     texture: "#b0b0b0",
