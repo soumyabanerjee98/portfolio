@@ -1,5 +1,5 @@
 export const webConfig = {
-  url: "https://portfolio-api-zh5g.onrender.com/",
+  url: "/",
   first_name: "Soumya",
   full_name: "Soumya Banerjee",
   details:
